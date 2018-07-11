@@ -1,0 +1,70 @@
+{
+	"plugin_id": "solarphase",
+	"name_fr": "Phase Solaire",
+	"icon": "phase_solaire_128.png",
+	"version": "1.2",
+	"creation_date": "2017-08-22",
+	"modification_date": "2018-06-15",
+	"author": "timetre - sur la base d'un script de vva",
+	"description_fr": "Ce plugin retourne les différentes phases solaires (Nuit, Aube Astronomique, Aube Nautique, Aube Civile, Jour, Crépuscule Civil, Crépuscule Nautique, Crépuscule Astronomique) pour un endroit dont on fournit les coordonnées de longitude/latitude",
+	"description_en": "This plugin returns the various solar phases (Night, Astronomical Dawn, Nautical Dawn, Civil Dawn, Day, Civil Dusk, Nautical Dusk, Astronomical Dusk) for a location described by its longitude/latitude coordinates",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=5810",
+	"parameters":
+	[
+		{
+			"parameter": "Latitude",
+			"description": "<a href='https://www.coordonnees-gps.fr' target='_blank'>Latitude</a> (Ex. Nice : 43.7101)",
+			"xtype": "textfield",
+			"default_value": "43.7101",
+			"field": "width:150, allowBlank:false"
+		},
+		{
+			"parameter": "Longitude",
+			"description": "<a href='https://www.coordonnees-gps.fr' target='_blank'>Longitude</a> (Ex. Nice : 7.2619)",
+			"xtype": "textfield",
+			"default_value": "7.2619",
+			"field": "width:150, allowBlank:false"
+		}
+	],
+	"scripts":
+	[
+		{
+			"name": "aube_crepuscule.php"
+		}
+	],
+	"devices":
+	[
+		{
+			"device_id": "solarphase",
+			"module_id": "51",
+			"type": "http",
+			"name_fr": "plugin.name",
+			"icon": "phase_solaire.png",
+			"utilisation_id": "35",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.Latitude",
+				"VAR2": "plugin.parameters.Longitude",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://localhost/script/?exec=aube_crepuscule.php&latitude=[VAR1]&longitude=[VAR2]",
+				"RAW_XPATH": "/Data/Soleil/Day_Phase",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": "0", "description": "Nuit", "icon": "phase_solaire_nuit.png" },
+				{ "value": "1", "description": "Aube astronomique", "icon": "aube_astro.png" },
+				{ "value": "2", "description": "Aube nautique", "icon": "aube_nautique.png" },
+				{ "value": "3", "description": "Aube civile", "icon": "aube_civile.png" },
+				{ "value": "4", "description": "Jour", "icon": "phase_solaire_jour.png" },
+				{ "value": "5", "description": "Crépuscule civil", "icon": "crepuscule_civil.png" },
+				{ "value": "6", "description": "Crépuscule nautique", "icon": "crepuscule_nautique.png" },
+				{ "value": "7", "description": "Crapuscule astronomique", "icon": "crepuscule_astro.png" }
+			]			
+		}
+	]
+}
